@@ -1,0 +1,34 @@
+# @nis2shield/react-guard - AI Context
+
+## What is this library?
+A React library for NIS2 Directive compliance on the frontend.
+Provides session protection, security telemetry, and encrypted storage.
+
+## Core Components
+- `<SessionWatchdog>` - Idle timeout, auto-logout, tab napping protection
+- `<AuditBoundary>` - Error boundary that reports crashes to SIEM
+- `<SecurityBanner>` - Warns about insecure connections/browsers
+
+## Core Hooks
+- `useSecureStorage(key, initial)` - AES-GCM encrypted localStorage
+- `useSecureInput({ type })` - Hardened input field props
+- `useDeviceFingerprint()` - Session hijacking detection
+- `useNis2Log()` - Report custom security incidents
+
+## Typical Setup
+```tsx
+<Nis2Provider config={{ auditEndpoint: '/api/telemetry/', idleTimeoutMinutes: 15 }}>
+  <AuditBoundary fallback={<LockScreen />}>
+    <SessionWatchdog onIdle={() => logout()} />
+    <App />
+  </AuditBoundary>
+</Nis2Provider>
+```
+
+## Backend Integration
+Pair with `django-nis2-shield` (Python) or `@nis2shield/express-middleware` (Node.js).
+Telemetry is sent to `auditEndpoint` as JSON.
+
+## NIS2 Articles Addressed
+- Art. 21.2.h: Session management, inactivity timeouts
+- Art. 21.2.j: Security monitoring and logging
