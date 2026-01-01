@@ -1,0 +1,40 @@
+# NIS2 Shield Frontend Monorepo Context
+
+This repository is a Monorepo containing the frontend ecosystem for NIS2 Shield.
+
+## Structure
+
+- `/packages/core`: (@nis2shield/core) 
+  - Pure TypeScript SDK. Contains AES-GCM encryption, session management, and device fingerprinting.
+  - Framework agnostic. ZERO UI dependencies.
+  
+- `/packages/angular`: (@nis2shield/angular-guard)
+  - Angular Library wrapper (Angular 16+).
+  - Consumes @nis2shield/core.
+  - Exports: Nis2Module, Nis2Service, Nis2Interceptor, Nis2CanActivateGuard.
+
+- `/packages/vue`: (@nis2shield/vue-guard)
+  - Vue 3 Plugin and Composables.
+  - Consumes @nis2shield/core.
+  - Exports: createNis2Plugin, useNis2, useSecureStorage.
+
+## Development Rules
+
+1. Business Logic ALWAYS goes into `/packages/core`.
+2. Angular/Vue packages should only contain framework-specific glue code (Services, Components, Providers).
+3. When refactoring Core, ensure compatibility with the interfaces defined in `/packages/core/src/types.ts`.
+4. All cryptographic operations use Web Crypto API (AES-GCM 256-bit).
+
+## Key Classes in Core
+
+- `CryptoService`: AES-GCM encryption/decryption, SHA-256 hashing
+- `SessionGuardian`: Idle detection, visibility change monitoring
+- `DeviceFingerprinter`: Canvas hash, WebGL info, platform detection
+- `SecureStorage`: Encrypted localStorage/sessionStorage wrapper
+- `TelemetryReporter`: Audit event dispatch to backend
+
+## NIS2 Compliance Features
+
+- Art. 21.2.h: Session timeout enforcement
+- Art. 21.2.j: Cryptographic data protection
+- Art. 23: Incident reporting telemetry

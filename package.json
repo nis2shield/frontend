@@ -1,0 +1,31 @@
+{
+    "name": "nis2shield-frontend-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "description": "NIS2 Shield Frontend Ecosystem - Core SDK + Framework Wrappers",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "npm run build --workspaces --if-present",
+        "test": "npm test --workspaces --if-present",
+        "lint": "npm run lint --workspaces --if-present",
+        "clean": "rm -rf packages/*/dist packages/*/node_modules node_modules"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nis2shield/frontend.git"
+    },
+    "keywords": [
+        "nis2",
+        "compliance",
+        "security",
+        "encryption",
+        "session-management"
+    ],
+    "author": "NIS2 Shield Team",
+    "license": "MIT",
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}

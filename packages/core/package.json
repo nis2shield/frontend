@@ -1,0 +1,56 @@
+{
+    "name": "@nis2shield/core",
+    "version": "0.1.0",
+    "description": "Framework-agnostic NIS2 compliance core library - encryption, session management, device fingerprinting",
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "scripts": {
+        "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+        "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "lint": "eslint src --ext .ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "keywords": [
+        "nis2",
+        "compliance",
+        "security",
+        "encryption",
+        "aes-gcm",
+        "session-management",
+        "fingerprint"
+    ],
+    "author": "NIS2 Shield Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nis2shield/frontend.git",
+        "directory": "packages/core"
+    },
+    "homepage": "https://nis2shield.com",
+    "bugs": {
+        "url": "https://github.com/nis2shield/frontend/issues"
+    },
+    "devDependencies": {
+        "tsup": "^8.0.0",
+        "typescript": "^5.3.0",
+        "vitest": "^1.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
