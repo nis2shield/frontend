@@ -4,7 +4,24 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Angular](https://img.shields.io/badge/Angular-16%2B-red.svg)](https://angular.io/)
 
-**Angular wrapper for NIS2 Shield — Session Guard, Secure Storage, and Security Telemetry.**
+**Enterprise-grade Angular wrapper for NIS2 compliance — Session Guard, Secure Storage, and Security Telemetry.**
+
+## Why this package?
+
+Companies subject to the **NIS2 Directive** require strict session management and audit logs. This library provides:
+
+1. **Automatic session termination** (Idle Timer) - `Nis2Service.isIdle$`
+2. **Route protection** - `Nis2CanActivateGuard` blocks navigation when idle
+3. **HTTP security headers** - `Nis2Interceptor` adds `X-NIS2-*` headers
+4. **Encrypted local storage** (AES-256) - `getSecureStorage()`
+5. **Device fingerprinting** - Session hijacking detection
+
+## Part of the NIS2 Shield Ecosystem
+
+- **Backend**: [django-nis2-shield](https://pypi.org/project/django-nis2-shield/), [nis2-spring-shield](https://search.maven.org/artifact/com.nis2shield/nis2-spring-shield)
+- **Core SDK**: [@nis2shield/core](../core) (dependency)
+- **Vue**: [@nis2shield/vue-guard](../vue)
+- **Infrastructure**: [nis2shield/infrastructure](https://github.com/nis2shield/infrastructure)
 
 ## Features
 
@@ -13,16 +30,6 @@
 - 📡 **Nis2Interceptor** — Automatic security headers on HTTP requests
 - 💾 **SecureStorage** — Encrypted localStorage via Core SDK
 - ⚡ **NgZone optimized** — Timers run outside Angular for performance
-
-## Installation
-
-```bash
-npm install @nis2shield/angular-guard @nis2shield/core
-```
-
-## Quick Start
-
-### 1. Configure Module
 
 ```typescript
 // app.module.ts

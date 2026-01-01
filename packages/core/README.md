@@ -4,9 +4,26 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 
-**Framework-agnostic NIS2 compliance core library.**
+**Enterprise-grade, framework-agnostic NIS2 compliance core library.**
 
-This is the foundation package for the NIS2 Shield frontend ecosystem. It provides pure TypeScript implementations of security features that can be used with any framework (React, Angular, Vue, etc.).
+## Why this package?
+
+Companies subject to the **NIS2 Directive** (EU 2022/2555) require strict security controls:
+
+| NIS2 Requirement | This Library Provides |
+|------------------|----------------------|
+| Art. 21.2.h - Access control | `SessionGuardian` - Automatic idle timeout |
+| Art. 21.2.j - Cryptography | `CryptoService` - AES-GCM 256-bit encryption |
+| Art. 21.2.g - Incident detection | `DeviceFingerprinter` - Session hijacking detection |
+| Art. 23 - Incident notification | `TelemetryReporter` - Audit event dispatch |
+
+**This is the foundation package.** Framework wrappers (`@nis2shield/angular-guard`, `@nis2shield/vue-guard`) consume this core.
+
+## Part of the NIS2 Shield Ecosystem
+
+- **Backend**: [django-nis2-shield](https://pypi.org/project/django-nis2-shield/), [nis2-spring-shield](https://search.maven.org/artifact/com.nis2shield/nis2-spring-shield), [@nis2shield/express-middleware](https://www.npmjs.com/package/@nis2shield/express-middleware)
+- **Frontend**: `@nis2shield/core` (this), [@nis2shield/angular-guard](../angular), [@nis2shield/vue-guard](../vue)
+- **Infrastructure**: [nis2shield/infrastructure](https://github.com/nis2shield/infrastructure) - Docker, Helm, Terraform
 
 ## Features
 
@@ -15,22 +32,6 @@ This is the foundation package for the NIS2 Shield frontend ecosystem. It provid
 - 🔍 **DeviceFingerprinter** - Canvas/WebGL fingerprinting for session validation
 - 💾 **SecureStorage** - Encrypted localStorage/sessionStorage wrapper
 - 📡 **TelemetryReporter** - Audit event dispatch to backend
-
-## Installation
-
-```bash
-npm install @nis2shield/core
-```
-
-## Quick Start
-
-```typescript
-import { 
-  CryptoService, 
-  SessionGuardian, 
-  SecureStorage,
-  TelemetryReporter 
-} from '@nis2shield/core';
 
 // Initialize services
 const crypto = new CryptoService();
