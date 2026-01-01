@@ -9,17 +9,37 @@
 | Package | Version | Description |
 |---------|---------|-------------|
 | [@nis2shield/core](./packages/core) | v0.1.0 | Framework-agnostic core library |
-| [@nis2shield/angular-guard](./packages/angular) | 🚧 WIP | Angular wrapper |
-| [@nis2shield/vue-guard](./packages/vue) | 🚧 WIP | Vue 3 wrapper |
+| [@nis2shield/react-guard](./packages/react) | v0.3.0 | React 18+ wrapper |
+| [@nis2shield/angular-guard](./packages/angular) | v0.1.0 | Angular 14+ wrapper |
+| [@nis2shield/vue-guard](./packages/vue) | v0.1.0 | Vue 3 wrapper |
 
 ## 🏗️ Architecture
 
 ```
 @nis2shield/core          (Pure TypeScript - Zero Dependencies)
         │
-        ├── @nis2shield/react-guard    (Existing package)
-        ├── @nis2shield/angular-guard  (Coming soon)
-        └── @nis2shield/vue-guard      (Coming soon)
+        ├── @nis2shield/react-guard    (React 18+)
+        ├── @nis2shield/angular-guard  (Angular 14+)
+        └── @nis2shield/vue-guard      (Vue 3 Composition API)
+```
+
+### Full-Stack Integration
+
+```
+┌─ Frontend (React / Angular / Vue) ──────────────────────────┐
+│  @nis2shield/{react,angular,vue}-guard                      │
+│  SessionWatchdog · SecureStorage · DeviceFingerprint        │
+└─────────────────────────────────────────────────────────────┘
+                        │ POST /api/nis2/telemetry/
+                        ▼
+┌─ Backend (Django / Spring / Express / .NET) ────────────────┐
+│  ForensicLogger · RateLimiter · SessionGuard · TorBlocker   │
+└─────────────────────────────────────────────────────────────┘
+                        │
+                        ▼
+┌─ Infrastructure ────────────────────────────────────────────┐
+│  nis2shield/infrastructure (Docker, Helm, Terraform)        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ## 🚀 Quick Start

@@ -141,7 +141,7 @@ const LoginPage = () => {
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                        Frontend                              │
-│  @nis2shield/react-guard                                    │
+│  @nis2shield/{react,angular,vue}-guard                      │
 │  ├── SessionWatchdog (idle detection)                       │
 │  ├── AuditBoundary (crash reports)                         │
 │  ├── useDeviceFingerprint (session validation)             │
