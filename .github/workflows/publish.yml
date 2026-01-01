@@ -5,23 +5,13 @@ on:
     types: [published]
   workflow_dispatch:
     inputs:
-      package:
-        description: 'Package to publish (core, angular, vue, all)'
-        type: choice
-        options:
-          - all
-          - core
-          - angular
-          - vue
-        default: all
       dry_run:
         description: 'Dry run (skip actual npm publish)'
         type: boolean
         default: false
 
 jobs:
-  publish-core:
-    if: ${{ github.event.inputs.package == 'core' || github.event.inputs.package == 'all' || github.event_name == 'release' }}
+  build-and-publish:
     runs-on: ubuntu-latest
     
     permissions:
@@ -41,49 +31,40 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Run tests (core)
-        run: npm test -w @nis2shield/core
-      
-      - name: Build (core)
+      # Build all packages in correct order (core first, then wrappers)
+      - name: Build @nis2shield/core
         run: npm run build -w @nis2shield/core
       
+      - name: Build @nis2shield/react-guard
+        run: npm run build -w @nis2shield/react-guard
+      
+      - name: Build @nis2shield/angular-guard
+        run: npm run build -w @nis2shield/angular-guard
+      
+      - name: Build @nis2shield/vue-guard
+        run: npm run build -w @nis2shield/vue-guard
+      
+      # Run tests
+      - name: Test @nis2shield/core
+        run: npm test -w @nis2shield/core
+      
+      - name: Test @nis2shield/react-guard
+        run: npm test -w @nis2shield/react-guard
+      
+      # Publish all packages
       - name: Publish @nis2shield/core
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: npm publish --access public --provenance -w @nis2shield/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
       
-      - name: Dry run - skip publish
-        if: ${{ github.event.inputs.dry_run == 'true' }}
-        run: |
-          echo "🧪 Dry run mode - skipping npm publish"
-          echo "Package: @nis2shield/core"
-          echo "Version: $(node -p "require('./packages/core/package.json').version")"
-
-  publish-angular:
-    if: ${{ github.event.inputs.package == 'angular' || github.event.inputs.package == 'all' || github.event_name == 'release' }}
-    needs: [publish-core]
-    runs-on: ubuntu-latest
-    
-    permissions:
-      contents: read
-      id-token: write
-    
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build (angular)
-        run: npm run build -w @nis2shield/angular-guard
+      - name: Publish @nis2shield/react-guard
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: npm publish --access public --provenance -w @nis2shield/react-guard
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
       
       - name: Publish @nis2shield/angular-guard
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -91,48 +72,21 @@ jobs:
         run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
-      - name: Dry run - skip publish
-        if: ${{ github.event.inputs.dry_run == 'true' }}
-        run: |
-          echo "🧪 Dry run mode - skipping npm publish"
-          echo "Package: @nis2shield/angular-guard"
-          echo "Version: $(node -p "require('./packages/angular/package.json').version")"
-
-  publish-vue:
-    if: ${{ github.event.inputs.package == 'vue' || github.event.inputs.package == 'all' || github.event_name == 'release' }}
-    needs: [publish-core]
-    runs-on: ubuntu-latest
-    
-    permissions:
-      contents: read
-      id-token: write
-    
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build (vue)
-        run: npm run build -w @nis2shield/vue-guard
+        continue-on-error: true
       
       - name: Publish @nis2shield/vue-guard
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: npm publish --access public --provenance -w @nis2shield/vue-guard
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        continue-on-error: true
       
-      - name: Dry run - skip publish
+      - name: Dry run summary
         if: ${{ github.event.inputs.dry_run == 'true' }}
         run: |
           echo "🧪 Dry run mode - skipping npm publish"
-          echo "Package: @nis2shield/vue-guard"
-          echo "Version: $(node -p "require('./packages/vue/package.json').version")"
+          echo "Packages that would be published:"
+          echo "  - @nis2shield/core: $(node -p "require('./packages/core/package.json').version")"
+          echo "  - @nis2shield/react-guard: $(node -p "require('./packages/react/package.json').version")"
+          echo "  - @nis2shield/angular-guard: $(node -p "require('./packages/angular/package.json').version")"
+          echo "  - @nis2shield/vue-guard: $(node -p "require('./packages/vue/package.json').version")"
