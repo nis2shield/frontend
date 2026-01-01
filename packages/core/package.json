@@ -46,6 +46,9 @@
         "url": "https://github.com/nis2shield/frontend/issues"
     },
     "devDependencies": {
+        "@vitest/coverage-v8": "^1.6.1",
+        "happy-dom": "^20.0.11",
+        "jsdom": "^27.4.0",
         "tsup": "^8.0.0",
         "typescript": "^5.3.0",
         "vitest": "^1.0.0"
