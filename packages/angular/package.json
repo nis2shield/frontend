@@ -1,0 +1,45 @@
+{
+    "name": "@nis2shield/angular-guard",
+    "version": "0.1.0",
+    "description": "Angular wrapper for NIS2 Shield - Session Guard, Secure Storage, and Security Telemetry",
+    "peerDependencies": {
+        "@angular/common": ">=16.0.0",
+        "@angular/core": ">=16.0.0",
+        "rxjs": ">=7.0.0"
+    },
+    "dependencies": {
+        "@nis2shield/core": "^0.1.0",
+        "tslib": "^2.6.0"
+    },
+    "devDependencies": {
+        "@angular/common": "^18.0.0",
+        "@angular/core": "^18.0.0",
+        "@angular/compiler": "^18.0.0",
+        "@angular/compiler-cli": "^18.0.0",
+        "@angular/platform-browser": "^18.0.0",
+        "@angular/router": "^18.0.0",
+        "ng-packagr": "^18.0.0",
+        "rxjs": "^7.8.0",
+        "typescript": "~5.4.0",
+        "zone.js": "~0.14.0"
+    },
+    "scripts": {
+        "build": "ng-packagr -p ng-package.json",
+        "build:watch": "ng-packagr -p ng-package.json --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nis2shield/frontend.git",
+        "directory": "packages/angular"
+    },
+    "keywords": [
+        "angular",
+        "nis2",
+        "security",
+        "session-management",
+        "compliance"
+    ],
+    "author": "NIS2 Shield Team",
+    "license": "MIT",
+    "homepage": "https://nis2shield.com"
+}
