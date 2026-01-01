@@ -1,6 +1,6 @@
 {
     "name": "@nis2shield/angular-guard",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Angular wrapper for NIS2 Shield - Session Guard, Secure Storage, and Security Telemetry",
     "peerDependencies": {
         "@angular/common": ">=16.0.0",
