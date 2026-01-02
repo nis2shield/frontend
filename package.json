@@ -1,6 +1,6 @@
 {
     "name": "nis2shield-frontend-monorepo",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "private": true,
     "description": "NIS2 Shield Frontend Ecosystem - Core SDK + Framework Wrappers",
     "workspaces": [

@@ -70,6 +70,15 @@ npm test
 npm run dev -w @nis2shield/core
 ```
 
+## 🛡️ Security & Updates
+
+**Subscribe to our [Security Mailing List](https://buttondown.email/nis2shield)** to receive immediate alerts about:
+- Critical vulnerabilities (CVEs)
+- NIS2/DORA regulatory logic updates
+- Major breaking changes
+
+For reporting vulnerabilities, see [SECURITY.md](SECURITY.md).
+
 ## 📄 License
 
 MIT License - see [LICENSE](LICENSE) for details.
