@@ -1,6 +1,6 @@
 {
     "name": "@nis2shield/core",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "description": "Framework-agnostic NIS2 compliance core library - encryption, session management, device fingerprinting",
     "type": "module",
     "main": "./dist/index.cjs",

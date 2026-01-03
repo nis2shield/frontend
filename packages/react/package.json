@@ -1,6 +1,6 @@
 {
     "name": "@nis2shield/react-guard",
-    "version": "0.3.1",
+    "version": "1.0.0",
     "description": "Enterprise-grade React component for NIS2 compliance, session timeout management, and security auditing.",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
@@ -36,7 +36,7 @@
         "react-dom": "^18.2.0"
     },
     "dependencies": {
-        "@nis2shield/core": "^0.1.0"
+        "@nis2shield/core": "^1.0.0"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^6.0.0",
