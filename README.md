@@ -8,10 +8,10 @@
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| [@nis2shield/core](./packages/core) | v0.1.0 | Framework-agnostic core library |
-| [@nis2shield/react-guard](./packages/react) | v0.3.0 | React 18+ wrapper |
-| [@nis2shield/angular-guard](./packages/angular) | v0.1.0 | Angular 14+ wrapper |
-| [@nis2shield/vue-guard](./packages/vue) | v0.1.0 | Vue 3 wrapper |
+| [@nis2shield/core](./packages/core) | v1.1.1 | Framework-agnostic core library |
+| [@nis2shield/react-guard](./packages/react) | v1.1.1 | React 18+ wrapper |
+| [@nis2shield/angular-guard](./packages/angular) | v1.1.1 | Angular 14+ wrapper |
+| [@nis2shield/vue-guard](./packages/vue) | v1.1.1 | Vue 3 wrapper |
 
 ## 🏗️ Architecture
 
